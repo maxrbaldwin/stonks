@@ -1,0 +1,2 @@
+# stonks
+trading helper app
