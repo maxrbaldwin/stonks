@@ -1,5 +1,5 @@
-const { fetchRecentQuotes } = require('./stockQuoteController');
-const { fetchDataByWorksheetIndex, fetchRows } = require('./spreadsheetController');
+const { fetchRecentQuotes } = require('@controllers/stockQuoteController');
+const { fetchDataByWorksheetIndex, fetchRows } = require('@controllers/spreadsheetController');
 
 const positionsSheetIndex  = 0;
 
@@ -37,4 +37,4 @@ async function fetchPositionQuotes() {
   }
 }
 
-fetchPositionQuotes()
+module.exports = fetchPositionQuotes
