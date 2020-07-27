@@ -1,7 +1,5 @@
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 
-console.log(process.env['SERVICE_ACCOUNT'])
-console.log(typeof process.env['SERVICE_ACCOUNT']);
 const creds = JSON.parse(process.env['SERVICE_ACCOUNT']);
 const email = creds['client_email'];
 const privateKey = creds['private_key'];
