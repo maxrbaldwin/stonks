@@ -16,8 +16,8 @@ async function fetchPositionQuotes() {
       const { symbol } = row;
       const quote = quotes[symbol];
       const { openPrice, highPrice, lowPrice } = quote;
-      const buyAt = parseNumber(row['buy at'] || lowPrice);
-      const sellAt = parseNumber(row['sell at'] || highPrice);
+      const buyAt = parseNumber(row['buy at'] || 0);
+      const sellAt = parseNumber(row['sell at'] || 0);
 
       row.open = openPrice;
       row.high = highPrice;
