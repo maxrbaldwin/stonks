@@ -40,7 +40,7 @@ async function fetchPositionQuotes() {
     positionsRows.forEach(async row => {
       const { symbol } = row;
       const quote = quotes[symbol];
-      const { askPrice, openPrice, highPrice, lowPrice } = quote || {};
+      const { askPrice, openPrice, highPrice, lowPrice, '52WkHigh': yearHigh, '52WkLow': yearLow } = quote || {};
       const position = parseNumber(row.position)
 
       row.position = position || askPrice;
@@ -49,6 +49,8 @@ async function fetchPositionQuotes() {
       row.open = openPrice;
       row.high = highPrice;
       row.low = lowPrice;
+      row['52 week high'] = yearHigh;
+      row['52 week low'] = yearLow;
       row['ten percent gain'] = getTenPercentChange(position, row.volume);
       row['five percent loss'] = getFivePercentLoss (position, row.volume);
       row['limit order'] = getLimitOrder(position)
