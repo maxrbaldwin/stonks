@@ -1,6 +1,9 @@
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 
-const creds = JSON.parse(process.env['SERVICE_ACCOUNT']);
+const creds = typeof process.env['SERVICE_ACCOUNT'] === 'object' ? 
+  process.env['SERVICE_ACCOUNT'] : 
+  JSON.parse(process.env['SERVICE_ACCOUNT']);
+  
 const email = creds['client_email'];
 const privateKey = creds['private_key'];
 

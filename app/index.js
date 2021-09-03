@@ -1,9 +1,30 @@
 require('module-alias/register');
 
+const CronJob = require('cron').CronJob;
 const fetchPositionQuotes = require('@modules/fetchPositionQuotes');
 
-function jobs() {
-  fetchPositionQuotes()
-}
+const everyThreeMinutes = '0 */3 * * * *';
 
-jobs();
+const fetchPositionQuotesJob = new CronJob(
+  everyThreeMinutes,
+  fetchPositionQuotes,
+  null,
+  true,
+  'America/New_York',
+  null,
+  true,
+);
+
+const jobs = [
+  fetchPositionQuotesJob,
+];
+
+jobs.forEach(job => {
+  job.start();
+})
+
+// function jobs() {
+//   fetchPositionQuotes()
+// }
+
+// jobs();
