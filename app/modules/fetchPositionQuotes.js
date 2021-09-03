@@ -40,7 +40,6 @@ async function fetchPositionQuotes() {
     positionsRows.forEach(async row => {
       const { symbol } = row;
       const quote = quotes[symbol];
-      console.log(quote)
       const { askPrice, openPrice, highPrice, lowPrice, '52WkHigh': yearHigh, '52WkLow': yearLow } = quote || {};
       const position = parseNumber(row.position)
 
