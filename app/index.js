@@ -22,9 +22,3 @@ const jobs = [
 jobs.forEach(job => {
   job.start();
 })
-
-// function jobs() {
-//   fetchPositionQuotes()
-// }
-
-// jobs();
