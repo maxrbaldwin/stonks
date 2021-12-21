@@ -23,6 +23,7 @@ jobs.forEach(job => {
   job.start();
 })
 
+// for local testing
 // function jobs() {
 //   fetchPositionQuotes()
 // }
