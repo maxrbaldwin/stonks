@@ -31,6 +31,16 @@ const getStopLoss = position => {
 
 const parseNumber = number => typeof number === 'string' && number.substring(0,1) === '$' ? parseFloat(number.replace('$', '')) : parseFloat(number);
 
+const getPercentChange = (from, to) => {
+  const top = from - to;
+  const bottom = (from + to) / 2;
+  return (top / bottom) * 100;
+}
+
+const formatPercent = val => `${val.toFixed(2)}%`;
+
+const getAskTo52WeekHigh = (high, ask) => high - ask;
+
 async function fetchPositionQuotes() {
   try {
     const positions = await fetchDataByWorksheetIndex(positionsSheetIndex);
@@ -42,15 +52,18 @@ async function fetchPositionQuotes() {
       const quote = quotes[symbol];
       const { askPrice, openPrice, highPrice, lowPrice, '52WkHigh': yearHigh, '52WkLow': yearLow } = quote || {};
       const position = parseNumber(row.position)
+      const positionAskDiff = getPercentChange(askPrice, position);
 
       row.position = position || askPrice;
       row.volume = row.volume || 30;
+      row['position ask diff'] = formatPercent(positionAskDiff);
       row.ask = askPrice;
       row.open = openPrice;
       row.high = highPrice;
       row.low = lowPrice;
       row['52 week high'] = yearHigh;
       row['52 week low'] = yearLow;
+      row['ask to 52 week high'] = getAskTo52WeekHigh(yearHigh, askPrice);
       row['ten percent gain'] = getTenPercentChange(position, row.volume);
       row['five percent loss'] = getFivePercentLoss (position, row.volume);
       row['limit order'] = getLimitOrder(position)
