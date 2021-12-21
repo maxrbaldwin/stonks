@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
+    "cheerio": "^1.0.0-rc.10",
     "cron": "^1.8.2",
     "google-spreadsheet": "^3.0.11",
     "module-alias": "^2.2.2"
